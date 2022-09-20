@@ -16,43 +16,34 @@ if test ! $(which brew); then
 fi
 
 # Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
-rm -rf $HOME/.zshrc
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+rm -rf $HOME/.zprofile
+cp .zshrc $HOME/.zprofile
 
 # Update Homebrew recipes
 brew update
 
 # Install all our dependencies with bundle (See Brewfile)
 brew tap homebrew/bundle
-brew bundle --file $DOTFILES/Brewfile
+brew bundle --file Brewfile
 
-# Set default MySQL root password and auth type
-mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;"
+# nvm install
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
-# Install PHP extensions with PECL
-pecl install imagick redis swoole
+nvm install node
+nvm install 18
+nvm install 14.17.3
+nvm use 14.17.3
+npm install -g yarn
+npm install -g pm2
+sudo env PATH=$PATH:/Users/sam/.nvm/versions/node/v14.17.3/bin /Users/sam/.nvm/versions/node/v14.17.3/lib/node_modules/pm2/bin/pm2 startup launchd -u sam --hp /Users/sam
 
-# Install global Composer packages
-/usr/local/bin/composer global require laravel/installer laravel/valet beyondcode/expose spatie/global-ray spatie/visit
-
-# Install Laravel Valet
-$HOME/.composer/vendor/bin/valet install
-
-# Install Global Ray
-$HOME/.composer/vendor/bin/global-ray install
-
-# Create a Sites directory
-mkdir $HOME/Sites
-
-# Create sites subdirectories
-mkdir $HOME/Sites/blade-ui-kit
-mkdir $HOME/Sites/laravel
+# bun install 
+curl https://bun.sh/install | bash
 
 # Clone Github repositories
-$DOTFILES/clone.sh
-
-# Symlink the Mackup config file to the home directory
-ln -s $DOTFILES/.mackup.cfg $HOME/.mackup.cfg
+# $DOTFILES/clone.sh
 
 # Set macOS preferences - we will run this last because this will reload the shell
-source $DOTFILES/.macos
+source .macos
+   
