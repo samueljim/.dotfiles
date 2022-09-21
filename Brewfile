@@ -38,7 +38,9 @@ cask 'slack'
 cask 'visual-studio-code'
 cask 'zoom'
 cask 'spotify'
+cask 'hiddenbar'
 cask 'iina'
+cask 'grammarly-desktop'
 brew 'plex'
 
 # Fonts
