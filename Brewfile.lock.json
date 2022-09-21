@@ -2,16 +2,16 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "4ca12bf5a1b516c98a2a289a4a114d41825cbf72"
+        "revision": "7746df06c649153ddc41f9c0729f0f863088b7d0"
       },
       "homebrew/cask-fonts": {
-        "revision": "fcdfdd253507d3b129d185546cee90c1d1f227c8"
+        "revision": "8fef229ebe25d19ce0d3fca85d939c9df7aaf291"
       },
       "homebrew/cask-versions": {
-        "revision": "d812d06659047c9903fefb9ae20195514c602134"
+        "revision": "47020078c7cc64897553686501977915a7136dea"
       },
       "homebrew/bundle": {
-        "revision": "89ecc8a5c6d4c29bf646255b8b06588c5479b61f"
+        "revision": "95e1114e202c57887b761e268f43f0077f593f0f"
       },
       "nicoverbruggen/cask": {
         "revision": "ac0c76134d326c43cc567855b74ca644c81d35ec"
@@ -365,13 +365,13 @@
         }
       },
       "fork": {
-        "version": "2.22",
+        "version": "2.22.1",
         "options": {
           "full_name": "fork"
         }
       },
       "warp": {
-        "version": "0.2022.09.13.08.15.stable_02",
+        "version": "0.2022.09.13.08.15.stable_03",
         "options": {
           "full_name": "warp"
         }
@@ -401,7 +401,7 @@
         }
       },
       "firefox": {
-        "version": "104.0.2",
+        "version": "105.0",
         "options": {
           "full_name": "firefox"
         }
@@ -431,7 +431,7 @@
         }
       },
       "slack": {
-        "version": "4.28.171",
+        "version": "4.28.182",
         "options": {
           "full_name": "slack"
         }
@@ -507,6 +507,24 @@
         "options": {
           "full_name": "font-fira-code"
         }
+      },
+      "hiddenbar": {
+        "version": "1.9",
+        "options": {
+          "full_name": "hiddenbar"
+        }
+      },
+      "grammarly-desktop": {
+        "version": "1.11.0.3",
+        "options": {
+          "full_name": "grammarly-desktop"
+        }
+      },
+      "plex": {
+        "version": "1.54.2.3267,d35cd36f",
+        "options": {
+          "full_name": "plex"
+        }
       }
     },
     "mas": {
@@ -525,7 +543,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.6.2",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "7bc1b9afc6c04e7b86e4a44881ecb20167b6d599",
+        "Homebrew/homebrew-core": "456773a8c7cf26a03c023eb1d042330f90614099",
         "CLT": "14.0.0.0.1.1661618636",
         "Xcode": "14.0",
         "macOS": "12.6"

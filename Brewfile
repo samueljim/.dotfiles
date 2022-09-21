@@ -41,7 +41,7 @@ cask 'spotify'
 cask 'hiddenbar'
 cask 'iina'
 cask 'grammarly-desktop'
-brew 'plex'
+cask 'plex'
 
 # Fonts
 cask 'font-lato'
