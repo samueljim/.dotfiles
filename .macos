@@ -171,7 +171,7 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 # sudo systemsetup -settimezone "Europe/Brussels" > /dev/null
 
 # Stop iTunes from responding to the keyboard media keys
-#launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
 ###############################################################################
 # Energy saving                                                               #
@@ -340,7 +340,7 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 # Show the ~/Library folder
-chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+# chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
 
 # Show the /Volumes folder
 # sudo chflags nohidden /Volumes
@@ -575,8 +575,12 @@ defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnab
 # Spotlight                                                                   #
 ###############################################################################
 
+# remove shortcut to open spotlight
+/usr/libexec/PlistBuddy ~/Library/Preferences/com.apple.symbolichotkeys.plist -c \
+  "Set AppleSymbolicHotKeys:64:enabled false"
+
 # Hide Spotlight tray-icon (and subsequent helper)
-#sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+# sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 # Disable Spotlight indexing for any volume that gets mounted and has not yet
 # been indexed before.
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
@@ -854,25 +858,72 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 # Set up my preferred keyboard shortcuts
 # cp -r init/spectacle.json ~/Library/Application\ Support/Spectacle/Shortcuts.json 2> /dev/null
 
+
+###############################################################################
+# miss                                                  #
+###############################################################################
+
+# Remove hot corners
+defaults write com.apple.dock wvous-tl-corner -int 0
+# remove icons from dock
+defaults write com.apple.dock persistent-apps -array ""
+# remove dock
+defaults write com.apple.dock autohide -bool true
+# remove desktop icons
+defaults write com.apple.finder CreateDesktop -bool false
+# remove spotlight
+sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+# remove spotlight from menu bar
+defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Volume.menu" "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
+# remove spotlight from keyboard shortcuts
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
+# add dock to left screen corner →
+defaults write com.apple.dock wvous-bl-corner -int 2
+defaults write com.apple.dock wvous-bl-modifier -int 0
+
+# setup bitwarden 
+defaults write /Library/Preferences/com.bitwarden.desktop touchIdEnabled -bool true
+defaults write com.bitwarden.desktop showTrayIcon -bool false
+defaults write com.bitwarden.desktop autoLaunch -bool true
+defaults write com.bitwarden.desktop autoUpdate -bool true
+defaults write com.bitwarden.desktop checkForUpdates -bool true
+
+# setup raycast
+defaults write com.raycast.app showDockIcon -bool false
+defaults write com.raycast.app showStatusBarIcon -bool false
+
+# setup messenger
+defaults write com.facebook.Messenger showDockIcon -bool false
+
+# setup xcode for flutter
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+sudo xcodebuild -runFirstLaunch
+
+# set dark mode
+defaults write -g AppleInterfaceStyle -string "Dark"
+
+# update macos
+sudo softwareupdate -i -a
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Activity Monitor" \
-    "Address Book" \
-    "Calendar" \
-    "Contacts" \
-    "Dock" \
-    "Finder" \
-    "Google Chrome" \
-    "Mail" \
-    "Messages" \
-    "Photos" \
-    "Safari" \
-    "SizeUp" \
-    "Spectacle" \
-    "SystemUIServer" \
-    "Terminal" \
-    killall "${app}" &> /dev/null
-done
+# for app in "Activity Monitor" \
+#     "Address Book" \
+#     "Calendar" \
+#     "Contacts" \
+#     "Dock" \
+#     "Finder" \
+#     "Google Chrome" \
+#     "Mail" \
+#     "Messages" \
+#     "Photos" \
+#     "Safari" \
+#     "SizeUp" \
+#     "Spectacle" \
+#     "SystemUIServer" \
+#     "Terminal" \
+#     killall "${app}" &> /dev/null
+# done
 echo "Done. Note that some of these changes require a logout/restart to take effect."

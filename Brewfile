@@ -18,10 +18,21 @@ brew 'svn' # Needed to install fonts
 brew 'nvm'
 brew 'python3'
 brew 'docker'
+brew 'watchman'
+cask 'android-sdk'
+cask 'android-ndk'
+cask 'android-studio'
+cask 'flutter'
+brew 'GCC'
+brew 'libimobiledevice'
+brew 'ideviceinstaller'
+brew 'ios-deploy'
+brew 'cocoapods'
 
 # Apps
 cask 'raycast'
 cask 'messenger'
+brew 'mackup'
 cask 'rectangle'
 cask 'fork'
 cask 'warp'
@@ -56,3 +67,4 @@ cask 'font-fira-code'
 # Mac App Store
 mas 'Bitwarden', id: 1352778147
 mas 'Paste', id: 967805235
+mas 'Xcode', id: 497799835
